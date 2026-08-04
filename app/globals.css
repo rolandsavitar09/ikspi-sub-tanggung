@@ -1,26 +1,765 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #020617;
+  --foreground: #f8fafc;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: "Courier New", Courier, monospace;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.hero-title-grunge {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-title-grunge::after {
+  content: none;
+}
+
+.hero-color-glow {
+  background:
+    radial-gradient(circle at 18% 28%, rgba(37, 99, 235, 0.28), transparent 28%),
+    radial-gradient(circle at 82% 28%, rgba(220, 38, 38, 0.34), transparent 30%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.74));
+}
+
+.hero-title-animate {
+  animation:
+    hero-text-reveal 900ms cubic-bezier(0.16, 1, 0.3, 1) both,
+    hero-title-neon 2.8s ease-in-out 900ms infinite,
+    hero-title-float 5.2s ease-in-out 900ms infinite;
+}
+
+.hero-subtitle-animate {
+  animation:
+    hero-text-reveal 900ms cubic-bezier(0.16, 1, 0.3, 1) 180ms both,
+    hero-subtitle-float 5.2s ease-in-out 1.08s infinite;
+}
+
+.hero-subtitle-neon-blue,
+.hero-subtitle-neon-red {
+  display: inline-block;
+  animation: hero-subtitle-neon-pulse 2.8s ease-in-out 1.08s infinite;
+}
+
+.hero-subtitle-neon-blue {
+  color: rgb(37, 99, 235);
+  text-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.9),
+    0 10px 24px rgba(0, 0, 0, 0.95),
+    0 0 8px rgba(29, 78, 216, 0.68),
+    0 0 18px rgba(30, 64, 175, 0.5),
+    0 0 32px rgba(30, 58, 138, 0.36);
+}
+
+.hero-subtitle-neon-red {
+  color: rgb(220, 38, 38);
+  text-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.9),
+    0 10px 24px rgba(0, 0, 0, 0.95),
+    0 0 8px rgba(185, 28, 28, 0.72),
+    0 0 18px rgba(153, 27, 27, 0.54),
+    0 0 32px rgba(127, 29, 29, 0.38);
+}
+
+.about-neon-blue {
+  color: rgb(37, 99, 235);
+  text-shadow:
+    0 3px 0 rgba(0, 0, 0, 0.85),
+    0 0 8px rgba(29, 78, 216, 0.62),
+    0 0 18px rgba(30, 58, 138, 0.42);
+}
+
+.about-neon-red {
+  color: rgb(185, 28, 28);
+  text-shadow:
+    0 3px 0 rgba(0, 0, 0, 0.85),
+    0 0 8px rgba(185, 28, 28, 0.66),
+    0 0 18px rgba(127, 29, 29, 0.46);
+}
+
+.about-heading-scroll {
+  animation: about-heading-scroll-in linear both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 36%;
+}
+
+.about-image-frame {
+  position: relative;
+  min-height: 10.5rem;
+  padding: 1.5px;
+  background:
+    linear-gradient(135deg, rgba(37, 99, 235, 1), rgba(37, 99, 235, 0.72) 34%, rgba(220, 38, 38, 0.55) 68%, rgba(220, 38, 38, 1)),
+    #020617;
+  clip-path: polygon(0 0, 88% 0, 100% 14%, 100% 88%, 90% 100%, 10% 100%, 0 88%);
+  filter:
+    drop-shadow(0 0 16px rgba(37, 99, 235, 0.62))
+    drop-shadow(0 0 26px rgba(220, 38, 38, 0.42));
+  animation: about-frame-neon 3.2s ease-in-out infinite;
+  transition:
+    filter 220ms ease,
+    transform 220ms ease;
+}
+
+.about-image-frame:hover {
+  transform: perspective(900px) rotateX(2deg) rotateY(-3deg) translateY(-4px) scale(1.02);
+  filter:
+    drop-shadow(0 0 24px rgba(37, 99, 235, 0.82))
+    drop-shadow(0 0 36px rgba(220, 38, 38, 0.64));
+}
+
+.about-image-frame::before,
+.about-image-frame::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.about-image-frame::before {
+  left: 1.1rem;
+  top: 0;
+  width: 3.8rem;
+  height: 0.28rem;
+  background: linear-gradient(90deg, rgba(37, 99, 235, 1), rgba(37, 99, 235, 0.12));
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.8);
+}
+
+.about-image-frame::after {
+  right: 0;
+  bottom: 0.7rem;
+  width: 0.32rem;
+  height: 2.6rem;
+  background: linear-gradient(180deg, rgba(220, 38, 38, 0.2), rgba(220, 38, 38, 1));
+  box-shadow: 0 0 16px rgba(220, 38, 38, 0.85);
+}
+
+.about-image-frame-inner {
+  position: relative;
+  min-height: inherit;
+  overflow: hidden;
+  background: #020617;
+  clip-path: polygon(0.45rem 0.45rem, 87% 0.45rem, calc(100% - 0.45rem) 15%, calc(100% - 0.45rem) 86%, 88% calc(100% - 0.45rem), 12% calc(100% - 0.45rem), 0.45rem 86%);
+  box-shadow:
+    inset 0 0 18px rgba(37, 99, 235, 0.24),
+    inset 0 0 26px rgba(220, 38, 38, 0.18);
+}
+
+.about-image-frame-inner img {
+  transition: transform 260ms ease;
+}
+
+.about-image-frame:hover .about-image-frame-inner img {
+  transform: scale(1.06);
+}
+
+.about-image-frame-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 24%),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.16), transparent 30%, transparent 70%, rgba(220, 38, 38, 0.14));
+  pointer-events: none;
+}
+
+.about-copy > div > p {
+  margin-bottom: 0.25rem;
+  font-size: 0.58rem;
+  line-height: 1;
+}
+
+.about-copy .section-heading-line {
+  margin-top: 0.35rem;
+  height: 0.18rem;
+  width: 3rem;
+}
+
+@keyframes about-frame-neon {
+  0%,
+  100% {
+    filter:
+      drop-shadow(0 0 14px rgba(37, 99, 235, 0.52))
+      drop-shadow(0 0 22px rgba(220, 38, 38, 0.34));
+  }
+
+  50% {
+    filter:
+      drop-shadow(0 0 22px rgba(37, 99, 235, 0.82))
+      drop-shadow(0 0 34px rgba(220, 38, 38, 0.62));
+  }
+}
+
+@keyframes about-heading-scroll-in {
+  from {
+    opacity: 0;
+    transform: translateY(42px) scale(0.92);
+  }
+
+  58% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.04);
+  }
+
+  78% {
+    transform: translateY(4px) scale(0.99);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hero-cta-3d {
+  position: relative;
+  transform: perspective(700px) translateY(0) rotateX(0);
+  transform-style: preserve-3d;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.hero-cta-3d:hover {
+  transform: perspective(700px) translateY(-3px) rotateX(7deg);
+}
+
+.hero-cta-3d:active {
+  transform: perspective(700px) translateY(5px) rotateX(0);
+}
+
+.hero-cta-3d-red {
+  box-shadow:
+    0 0 22px rgba(220, 38, 38, 0.65),
+    inset 0 0 20px rgba(220, 38, 38, 0.18);
+}
+
+.hero-cta-3d-red:hover {
+  box-shadow:
+    0 0 32px rgba(220, 38, 38, 0.9),
+    inset 0 0 22px rgba(220, 38, 38, 0.2);
+}
+
+.hero-cta-3d-red:active {
+  box-shadow:
+    0 0 18px rgba(220, 38, 38, 0.62),
+    inset 0 0 18px rgba(220, 38, 38, 0.24);
+}
+
+.hero-cta-3d-blue {
+  box-shadow:
+    0 0 22px rgba(37, 99, 235, 0.6),
+    inset 0 0 20px rgba(37, 99, 235, 0.18);
+}
+
+.hero-cta-3d-blue:hover {
+  box-shadow:
+    0 0 32px rgba(37, 99, 235, 0.9),
+    inset 0 0 22px rgba(37, 99, 235, 0.2);
+}
+
+.hero-cta-3d-blue:active {
+  box-shadow:
+    0 0 18px rgba(37, 99, 235, 0.62),
+    inset 0 0 18px rgba(37, 99, 235, 0.24);
+}
+
+.philosophy-card {
+  position: relative;
+  overflow: hidden;
+  transform: perspective(800px) translateY(0) rotateX(0) rotateY(0);
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background-color 220ms ease;
+}
+
+.philosophy-card-red {
+  box-shadow:
+    0 0 14px rgba(220, 38, 38, 0.28),
+    0 0 30px rgba(220, 38, 38, 0.12);
+}
+
+.philosophy-card-blue {
+  box-shadow:
+    0 0 14px rgba(37, 99, 235, 0.28),
+    0 0 30px rgba(37, 99, 235, 0.12);
+}
+
+.philosophy-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+}
+
+.philosophy-card::after {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  top: 0;
+  height: 2px;
+  opacity: 0;
+  transform: translateX(-35%);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+  pointer-events: none;
+}
+
+.philosophy-card:hover {
+  transform: perspective(800px) translateY(-8px) rotateX(4deg) rotateY(-3deg);
+}
+
+.philosophy-card:hover::before,
+.philosophy-card:hover::after {
+  opacity: 1;
+}
+
+.philosophy-card:hover::after {
+  transform: translateX(0);
+}
+
+.philosophy-card-red:hover {
+  border-color: rgba(220, 38, 38, 0.95);
+  background-color: rgba(15, 23, 42, 0.92);
+  box-shadow:
+    0 0 24px rgba(220, 38, 38, 0.72),
+    0 0 46px rgba(220, 38, 38, 0.32),
+    0 18px 32px rgba(0, 0, 0, 0.36),
+    inset 0 0 24px rgba(220, 38, 38, 0.12);
+}
+
+.philosophy-card-red::before {
+  background: radial-gradient(circle at 50% 0%, rgba(220, 38, 38, 0.22), transparent 58%);
+}
+
+.philosophy-card-red::after {
+  background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 1), transparent);
+  box-shadow: 0 0 16px rgba(220, 38, 38, 0.9);
+}
+
+.philosophy-card-blue:hover {
+  border-color: rgba(37, 99, 235, 0.95);
+  background-color: rgba(15, 23, 42, 0.92);
+  box-shadow:
+    0 0 24px rgba(37, 99, 235, 0.7),
+    0 0 46px rgba(37, 99, 235, 0.3),
+    0 18px 32px rgba(0, 0, 0, 0.36),
+    inset 0 0 24px rgba(37, 99, 235, 0.12);
+}
+
+.philosophy-card-blue::before {
+  background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.22), transparent 58%);
+}
+
+.philosophy-card-blue::after {
+  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 1), transparent);
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.9);
+}
+
+.schedule-section-bg {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 8% 70%, rgba(37, 99, 235, 0.26), transparent 28%),
+    radial-gradient(circle at 92% 70%, rgba(220, 38, 38, 0.28), transparent 28%),
+    linear-gradient(180deg, #020617, #020617 40%, #050505);
+}
+
+.schedule-section-bg > div {
+  position: relative;
+  z-index: 1;
+}
+
+.schedule-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transform: perspective(900px) translateY(0) rotateX(0) rotateY(0);
+  transition:
+    transform 240ms ease,
+    box-shadow 240ms ease;
+  background:
+    linear-gradient(180deg, rgba(2, 6, 23, 0.92), rgba(0, 0, 0, 0.92)),
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.08), transparent 45%);
+  clip-path: polygon(8% 0, 92% 0, 100% 10%, 100% 88%, 92% 100%, 8% 100%, 0 88%, 0 10%);
+  min-height: 23rem;
+}
+
+.schedule-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.schedule-card::before,
+.schedule-card::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  clip-path: polygon(8% 0, 92% 0, 100% 10%, 100% 88%, 92% 100%, 8% 100%, 0 88%, 0 10%);
+}
+
+.schedule-card::before {
+  inset: 0;
+  background: currentColor;
+  z-index: 0;
+  filter: drop-shadow(0 0 18px currentColor);
+}
+
+.schedule-card::after {
+  inset: 2px;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, rgba(2, 6, 23, 0.96), rgba(0, 0, 0, 0.96)),
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, currentColor 20%, transparent), transparent 48%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 22%);
+}
+
+.schedule-card-blue {
+  color: rgb(37, 99, 235);
+  box-shadow:
+    0 0 26px rgba(37, 99, 235, 0.72),
+    0 0 62px rgba(37, 99, 235, 0.32),
+    inset 0 0 24px rgba(37, 99, 235, 0.12);
+}
+
+.schedule-card-red {
+  color: rgb(220, 38, 38);
+  box-shadow:
+    0 0 26px rgba(220, 38, 38, 0.74),
+    0 0 62px rgba(220, 38, 38, 0.34),
+    inset 0 0 24px rgba(220, 38, 38, 0.12);
+}
+
+.schedule-card:hover {
+  transform: perspective(900px) translateY(-10px) rotateX(4deg) rotateY(-3deg);
+}
+
+.schedule-card-blue:hover {
+  box-shadow:
+    0 0 34px rgba(37, 99, 235, 0.95),
+    0 0 82px rgba(37, 99, 235, 0.5),
+    0 18px 34px rgba(0, 0, 0, 0.45),
+    inset 0 0 30px rgba(37, 99, 235, 0.18);
+}
+
+.schedule-card-red:hover {
+  box-shadow:
+    0 0 34px rgba(220, 38, 38, 0.98),
+    0 0 82px rgba(220, 38, 38, 0.52),
+    0 18px 34px rgba(0, 0, 0, 0.45),
+    inset 0 0 30px rgba(220, 38, 38, 0.18);
+}
+
+.schedule-card:hover .schedule-icon {
+  transform: translateY(-4px) scale(1.06);
+}
+
+.schedule-card:hover .schedule-location {
+  transform: translateY(3px);
+}
+
+.schedule-icon {
+  position: relative;
+  display: grid;
+  width: 4.25rem;
+  height: 4.25rem;
+  place-items: center;
+  border: 2px solid currentColor;
+  clip-path: polygon(50% 0, 94% 25%, 94% 75%, 50% 100%, 6% 75%, 6% 25%);
+  color: inherit;
+  box-shadow: 0 0 18px currentColor;
+  transition: transform 240ms ease;
+}
+
+.schedule-calendar-icon {
+  position: relative;
+  width: 1.7rem;
+  height: 1.65rem;
+  border: 3px solid white;
+  border-radius: 0.2rem;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.schedule-calendar-icon::before {
+  content: "";
+  position: absolute;
+  left: -3px;
+  right: -3px;
+  top: 0.35rem;
+  border-top: 3px solid white;
+}
+
+.schedule-calendar-icon::after {
+  content: "";
+  position: absolute;
+  left: 0.28rem;
+  top: -0.45rem;
+  width: 0.85rem;
+  height: 0.42rem;
+  border-left: 3px solid white;
+  border-right: 3px solid white;
+}
+
+.schedule-card-divider {
+  position: relative;
+  width: 70%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor, transparent);
+  box-shadow: 0 0 12px currentColor;
+}
+
+.schedule-card-divider::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0.45rem;
+  height: 0.45rem;
+  background: currentColor;
+  transform: translate(-50%, -50%) rotate(45deg);
+  box-shadow: 0 0 12px currentColor;
+}
+
+.schedule-location {
+  position: relative;
+  color: inherit;
+  background: rgba(2, 6, 23, 0.72);
+  border: 1px solid currentColor;
+  clip-path: polygon(8% 0, 92% 0, 100% 50%, 92% 100%, 8% 100%, 0 50%);
+  box-shadow:
+    inset 0 0 18px color-mix(in srgb, currentColor 22%, transparent),
+    0 0 16px color-mix(in srgb, currentColor 28%, transparent);
+  transition: transform 240ms ease;
+}
+
+.schedule-pin-icon {
+  position: relative;
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 50% 50% 50% 0;
+  background: currentColor;
+  transform: rotate(-45deg);
+  box-shadow: 0 0 14px currentColor;
+}
+
+.schedule-pin-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0.34rem;
+  border-radius: 999px;
+  background: #020617;
+}
+
+.schedule-values {
+  color: rgb(220, 38, 38);
+  border: 1px solid currentColor;
+  background: rgba(2, 6, 23, 0.72);
+  clip-path: polygon(5% 0, 95% 0, 100% 50%, 95% 100%, 5% 100%, 0 50%);
+  box-shadow:
+    0 0 18px rgba(220, 38, 38, 0.32),
+    inset 0 0 16px rgba(220, 38, 38, 0.12);
+}
+
+.schedule-people-icon {
+  position: relative;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.schedule-people-icon::before,
+.schedule-people-icon::after {
+  content: "";
+  position: absolute;
+  border: 2px solid white;
+}
+
+.schedule-people-icon::before {
+  left: 0.62rem;
+  top: 0.35rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+}
+
+.schedule-people-icon::after {
+  left: 0.42rem;
+  bottom: 0.38rem;
+  width: 0.82rem;
+  height: 0.42rem;
+  border-radius: 999px 999px 0 0;
+}
+
+@keyframes hero-text-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes hero-title-neon {
+  0%,
+  100% {
+    text-shadow:
+      0 4px 0 rgba(0, 0, 0, 0.9),
+      0 12px 28px rgba(0, 0, 0, 0.95),
+      0 0 8px rgba(255, 255, 255, 0.65),
+      0 0 18px rgba(255, 255, 255, 0.42),
+      0 0 34px rgba(37, 99, 235, 0.24);
+    filter: brightness(1);
+  }
+
+  8%,
+  12%,
+  72% {
+    text-shadow:
+      0 4px 0 rgba(0, 0, 0, 0.9),
+      0 12px 28px rgba(0, 0, 0, 0.95),
+      0 0 3px rgba(255, 255, 255, 0.35),
+      0 0 9px rgba(255, 255, 255, 0.24);
+    filter: brightness(0.92);
+  }
+
+  50% {
+    text-shadow:
+      0 4px 0 rgba(0, 0, 0, 0.9),
+      0 12px 28px rgba(0, 0, 0, 0.95),
+      0 0 10px rgba(255, 255, 255, 0.88),
+      0 0 24px rgba(255, 255, 255, 0.62),
+      0 0 46px rgba(37, 99, 235, 0.42),
+      0 0 64px rgba(220, 38, 38, 0.24);
+    filter: brightness(1.18);
+  }
+}
+
+@keyframes hero-subtitle-neon-pulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  10%,
+  14%,
+  70% {
+    filter: brightness(0.88);
+  }
+
+  50% {
+    filter: brightness(1.25);
+  }
+}
+
+@keyframes hero-title-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -8px;
+  }
+}
+
+@keyframes hero-subtitle-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-animate,
+  .hero-subtitle-animate,
+  .about-heading-scroll {
+    animation: none;
+  }
+
+  .about-image-frame,
+  .about-image-frame-inner img {
+    transition: none;
+  }
+
+  .about-image-frame:hover,
+  .about-image-frame:hover .about-image-frame-inner img,
+  .philosophy-card:hover,
+  .schedule-card:hover,
+  .schedule-card:hover .schedule-icon,
+  .schedule-card:hover .schedule-location {
+    transform: none;
+  }
+}
+
+@media (min-width: 640px) {
+  .about-image-frame {
+    min-height: 18rem;
+  }
+
+  .about-image-frame::before {
+    width: 7rem;
+  }
+
+  .about-image-frame::after {
+    bottom: 1rem;
+    height: 4.6rem;
+  }
+
+  .about-copy > div > p {
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .about-copy .section-heading-line {
+    margin-top: 0.75rem;
+    height: 0.25rem;
+    width: 6rem;
+  }
+
+  .hero-color-glow {
+    background:
+      radial-gradient(circle at 18% 62%, rgba(37, 99, 235, 0.28), transparent 28%),
+      radial-gradient(circle at 82% 62%, rgba(220, 38, 38, 0.34), transparent 30%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.74));
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-image-frame {
+    min-height: 24rem;
+  }
 }
