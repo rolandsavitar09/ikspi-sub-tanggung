@@ -12,14 +12,18 @@ export function PhilosophySection() {
             <article
               key={item.title}
               className={cn(
-                "philosophy-card rounded border bg-slate-950/80 p-6",
+                "philosophy-card rounded border bg-slate-950/80 p-3 text-center sm:p-6 sm:text-left",
                 item.tone === "red"
                   ? "philosophy-card-red border-red-500/50"
                   : "philosophy-card-blue border-blue-500/50",
               )}
             >
-              <p className="text-lg font-black uppercase text-white">{item.title}</p>
-              <p className="mt-3 text-sm leading-6 text-white/65">{item.description}</p>
+              <p className="break-words text-[0.82rem] font-black uppercase leading-tight text-white sm:text-lg">
+                {item.title}
+              </p>
+              <p className="mt-2 text-[0.68rem] leading-4 text-white/65 sm:mt-3 sm:text-sm sm:leading-6">
+                {item.description}
+              </p>
             </article>
           ))}
         </div>
