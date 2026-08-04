@@ -34,7 +34,7 @@ export function ScheduleSection() {
             </article>
           ))}
         </div>
-        <div className="schedule-values mx-auto mt-9 flex max-w-xl items-center justify-center gap-3 px-5 py-3 text-sm font-black uppercase text-white/80">
+        <div className="schedule-values mx-auto mt-9 flex max-w-xl items-center justify-center gap-2 px-3 py-3 text-[0.68rem] font-black uppercase text-white/80 sm:gap-3 sm:px-5 sm:text-sm">
           <span className="schedule-people-icon" />
           <span>Disiplin</span>
           <span className="text-red-500">•</span>
