@@ -72,7 +72,7 @@ export function ContactSection() {
           </div>
           <div className="mt-10 overflow-hidden rounded border border-blue-500/40 shadow-[0_0_24px_rgba(37,99,235,0.24)]">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.372043956778!2d112.231873!3d-8.0634805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78ed0079985deb%3A0xbb1a710b02859a54!2sRomelah%20Home!5e0!3m2!1sid!2sid!4v1785834594633!5m2!1sid!2sid"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.370822350722!2d112.23032666547552!3d-8.063605563909254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78ed000541eae3%3A0x755b8f5b054d1a42!2sIKSPI%20Kera%20Sakti%20Sub%20Tanggung!5e0!3m2!1sid!2sid!4v1785980480701!5m2!1sid!2sid"
               className="block h-72 w-full"
               style={{ border: 0 }}
               allowFullScreen
